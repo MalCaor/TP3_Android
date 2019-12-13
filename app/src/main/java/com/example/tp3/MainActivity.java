@@ -8,11 +8,22 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.ContactsContract;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import android.widget.Button;
+import androidx.fragment.app.Fragment;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import android.net.Uri;
+
+
+public class MainActivity extends AppCompatActivity implements BlankFragment.OnFragmentInteractionListener {
+private Fragment leFragment;
+private ImageView limage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,27 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        leFragment = (Fragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragment);
+        leFragment.getView().setVisibility(View.GONE);
+        limage= (ImageView) findViewById(R.id.imageView);
+        Button bOk=(Button) leFragment.getView().findViewById(R.id.bFragOk);
+        bOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),    "clic sur ok", Toast.LENGTH_SHORT
+                ).show();
+            }
+        });
+        Button bCancel=(Button) leFragment.getView().findViewById(R.id.bFragCancel);
+        bCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                leFragment.getView().setVisibility(View.GONE);
+                limage.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -40,16 +72,36 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.menu_connect:
+                Toast.makeText(getApplicationContext(),    "clic sur connect",Toast.LENGTH_LONG).show();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+                leFragment.getView().setVisibility(View.VISIBLE);
+                limage.setVisibility(View.GONE);
+                return true;
+            case R.id.menu_deconnect:
+                Toast.makeText(getApplicationContext(),    "clic sur deconnect",Toast.LENGTH_LONG).show();
 
-        return super.onOptionsItemSelected(item);
+                return true;
+            case R.id.menu_list:
+                Toast.makeText(getApplicationContext(),    "clic sur list",Toast.LENGTH_LONG).show();
+
+                return true;
+            case R.id.menu_import:
+                Toast.makeText(getApplicationContext(),    "clic sur import",Toast.LENGTH_LONG).show();
+
+                return true;
+            case R.id.menu_export:
+
+                Toast.makeText(getApplicationContext(),    "clic sur export",Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
