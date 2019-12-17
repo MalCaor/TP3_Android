@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements BlankFragment.OnF
         leFragment = (Fragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment);
         leFragment.getView().setVisibility(View.GONE);
-        //limage= (ImageView) findViewById(R.id.imageView);
+        limage= (ImageView) findViewById(R.id.imageView);
         Button bOk = (Button) leFragment.getView().findViewById(R.id.bFragOk);
         bOk.setOnClickListener(new View.OnClickListener() {
             @Override
