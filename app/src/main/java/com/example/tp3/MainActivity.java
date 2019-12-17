@@ -15,6 +15,8 @@ import android.view.MenuItem;
 
 import android.widget.Button;
 import androidx.fragment.app.Fragment;
+
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -49,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements BlankFragment.OnF
         bOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // test des saisies
+                if (((EditText)findViewById(R.id.etFragId)).getText().length() < 2)
+                {
+                    Toast.makeText(getApplicationContext(), "plus de 2", Toast.LENGTH_SHORT).show();
+                }
                 Toast.makeText(getApplicationContext(), "clic sur ok", Toast.LENGTH_SHORT
                 ).show();
             }
